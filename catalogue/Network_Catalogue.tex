@@ -53,17 +53,16 @@ Fall 2026--2027
 \textbf{Each group works on its own network, and no two groups can use the same one.} Networks are assigned \textbf{first come, first served}: the first group to claim a network gets it, and once a network is taken it is no longer available to anyone else. Read this catalogue, agree on a first and second choice within your group, and claim a network as soon as you decide.
 
 \begin{itemize}
-\item \textbf{How to claim:} \todo{claim channel and link to be added: sheet, form or Slack thread}. Write your group name, your members, and the folder name of the network (for example \code{wikispeedia}).
+\item \textbf{How to claim:} fill in the \textbf{Blackboard form} in your \textbf{Computer Programming I} course. Enter your group name, your members, and the folder name of the network (for example \code{wikispeedia}).
 \item The claim is final. Please do not swap networks once the claim is registered.
-\item You receive the data folder for your network after your claim is confirmed.
-\item Larger networks are more demanding to compute with. They are not graded differently, and the questions asked of every group are the same.
+\item The data are in the course GitHub repository \code{BAM-CPI-LA-Networks} \todo{add repository link}. You only need the folder of your own network.
 \end{itemize}
 
 The project tasks, deliverables, assessment, and deadlines are in the project description. This document only describes the networks.
 
-\section{What you receive}
+\section{The data format}
 
-Every network has been prepared by the teaching team and delivered in \textbf{the same format}, so the code you write for your network is the same code you would write for any other. You do not need to download anything from the original source.
+Every network has been prepared by the teaching team in \textbf{the same format}, so the code you write for your network is the same code you would write for any other. You do not need to download anything from the original source.
 
 \begin{verbatim}
 nodes.csv     node_id,label,group,x,y
@@ -151,14 +150,14 @@ Folder & Nodes & Edges & Domain\\\midrule
 {A small snapshot of Wikipedia: the 4,604 articles of the \emph{Wikipedia Selection for Schools}, used in the Wikispeedia navigation game. Each article has a subject (Science, Geography, Art, History, and so on).}
 {SNAP, \url{https://snap.stanford.edu/data/wikispeedia.html}. Cited as West and Leskovec and as West et al.\ in the references. Wikipedia text is available under CC BY-SA.}
 {We used the article list and the link list of the original download. Repeated links and self-links were removed. The label is the article title and the group is the subject of its first listed category. The game's navigation paths are not part of the data.}
-{This is a 2007 school subset, so only links between these articles exist. It is the largest network of the catalogue (see the note on size).}
+{This is a 2007 school subset, so only links between these articles exist.}
 
 \dataset{Bitcoin Alpha: web of trust}{bitcoin\_alpha}{3,783}{22,650}
 {user $i$ gave user $j$ a positive trust rating (from +1 to +10).}
 {Traders on the Bitcoin Alpha platform rate each other from $-10$ (total distrust) to $+10$ (total trust) to reduce fraud. The original network is signed and weighted; this one keeps only the positive trust ratings.}
 {SNAP, \url{https://snap.stanford.edu/data/soc-sign-bitcoin-alpha.html}. Cited as Kumar et al.\ in the references.}
 {Ratings of 0 or below do not create edges, and the rating values are dropped. If a user rated the same person more than once, the pair counts as one edge if any rating was positive. All 3,783 users stay as nodes even if they have no positive ratings.}
-{About 7\% of the original ratings were negative, so the graph is a partial picture of the community. A high score means many positive ratings, not proven honesty. This is one of the two largest networks.}
+{About 7\% of the original ratings were negative, so the graph is a partial picture of the community. A high score means many positive ratings, not proven honesty.}
 
 \dataset{ATP tennis: who lost to whom}{atp\_tennis}{1,191}{19,986}
 {player $i$ lost at least once to player $j$ in a tour-level match.}

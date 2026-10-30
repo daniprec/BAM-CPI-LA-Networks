@@ -2,7 +2,7 @@
 
 Directed networks for the Fall 2026 joint project of **Computer Programming I** and **Linear Algebra** (Bachelor in Applied Mathematics, IE University): *Network Centrality and PageRank Using Matrices in Python*.
 
-**Each group works on a different network, assigned first come, first served.** Read the **[Network Catalogue (PDF)](catalogue/Network_Catalogue.pdf)**, choose, and claim your network as announced by the teaching team. The catalogue explains every network, its original source, and how to cite it.
+**Each group works on a different network, assigned first come, first served.** Read the **[Network Catalogue (PDF)](catalogue/Network_Catalogue.pdf)**, choose, and claim your network by filling in the **Blackboard form in your Computer Programming I course**. The catalogue explains every network, its original source, and how to cite it.
 
 ## Networks
 
