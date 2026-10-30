@@ -1,0 +1,221 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype,booktabs,tabularx,enumitem,amsmath,fancyhdr,xcolor,graphicx,array}
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-\do\_\do\.\do\:\do\~}
+\Urlmuskip=0mu plus 1mu
+\definecolor{ieblue}{HTML}{000066}
+\definecolor{iemarine}{HTML}{0032A0}
+\hypersetup{colorlinks=true,urlcolor=iemarine,linkcolor=ieblue,citecolor=ieblue}
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small Network Centrality and PageRank}\rhead{\small Network Catalogue}\cfoot{\thepage}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.55em}
+\setlist[itemize]{leftmargin=*,itemsep=2pt}\setlist[enumerate]{leftmargin=*,itemsep=2pt}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{\colorbox{yellow}{\textbf{[#1]}}}
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{ieblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{ieblue}}{\thesubsection}{0.6em}{}
+
+% one block per dataset
+\newcommand{\dataset}[9]{%
+  \subsection{#1}
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries}l X@{}}
+    Folder & \code{#2}\\
+    Size & #3 nodes, #4 directed edges\\
+    An arrow $i\to j$ means & #5\\
+  \end{tabularx}
+
+  \textbf{What it is.} #6
+
+  \textbf{Original source.} #7
+
+  \textbf{What we did to the data.} #8
+
+  \textbf{Keep in mind.} #9
+}
+
+\begin{document}
+
+\begin{center}
+\includegraphics[height=2.2cm]{logo.pdf}\\[1.2em]
+{\Large\bfseries\color{ieblue} Network Catalogue}\\[0.4em]
+{\large Network Centrality and PageRank Using Matrices in Python}\\[0.4em]
+Linear Algebra and Computer Programming I\\
+Bachelor in Applied Mathematics, IE University\\
+Fall 2026--2027
+\end{center}
+
+\section{How the networks are assigned}
+
+\textbf{Each group works on its own network, and no two groups can use the same one.} Networks are assigned \textbf{first come, first served}: the first group to claim a network gets it, and once a network is taken it is no longer available to anyone else. Read this catalogue, agree on a first and second choice within your group, and claim a network as soon as you decide.
+
+\begin{itemize}
+\item \textbf{How to claim:} \todo{claim channel and link to be added: sheet, form or Slack thread}. Write your group name, your members, and the folder name of the network (for example \code{wikispeedia}).
+\item The claim is final. Please do not swap networks once the claim is registered.
+\item You receive the data folder for your network after your claim is confirmed.
+\item Larger networks are more demanding to compute with. They are not graded differently, and the questions asked of every group are the same.
+\end{itemize}
+
+The project tasks, deliverables, assessment, and deadlines are in the project description. This document only describes the networks.
+
+\section{What you receive}
+
+Every network has been prepared by the teaching team and delivered in \textbf{the same format}, so the code you write for your network is the same code you would write for any other. You do not need to download anything from the original source.
+
+\begin{verbatim}
+nodes.csv     node_id,label,group,x,y
+edges.csv     source,target
+README.md     description, meaning of an arrow, preparation, source, limitations
+\end{verbatim}
+
+\begin{itemize}
+\item \code{nodes.csv}: one row per node. \code{node\_id} runs from $0$ to $n-1$ in order, so it can be used directly as a matrix index. \code{label} is a human-readable name, \code{group} is a category when one exists, and \code{x}, \code{y} are coordinates only where the original data had them (otherwise blank).
+\item \code{edges.csv}: one row per arrow, from \code{source} to \code{target}, using \code{node\_id} values.
+\item \textbf{Edges are binary.} There are no repeated rows, so each ordered pair appears at most once. Any weights, ratings or counts present in the original data were dropped, as explained under each network.
+\item \textbf{Self-loops.} A self-loop is a row with \code{source} equal to \code{target}. They were removed from all networks except \code{email\_eu\_core}, which keeps its 642 self-loops because they belong to the released data. State how you treated them in your report.
+\item \textbf{Blank metadata stay blank.} Missing groups or coordinates are not filled in.
+\end{itemize}
+
+\subsection*{Original sources and citations}
+
+The data were collected by other people. \textbf{Your report must cite the original source of your network} (listed below under each network and in the references) \textbf{and say that the teaching team prepared the data in the format above.} Follow the citation style requested in the project description. Citing only this catalogue is not enough.
+
+All data are provided for this course only. Do not redistribute the files, and do not try to identify individual people from anonymised data.
+
+\section{Overview}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}l r r X@{}}\toprule
+Folder & Nodes & Edges & Domain\\\midrule
+\code{email\_eu\_core} & 1,005 & 25,571 & Emails inside a research institution\\
+\code{political\_blogs} & 1,490 & 19,022 & Links between US political blogs\\
+\code{florida\_bay} & 128 & 2,106 & Carbon flow in a food web\\
+\code{celegans\_frontal} & 131 & 764 & Synapses between neurons\\
+\code{collegemsg} & 1,899 & 20,296 & Private messages between students\\
+\code{wikispeedia} & 4,604 & 119,772 & Links between Wikipedia articles\\
+\code{bitcoin\_alpha} & 3,783 & 22,650 & Trust ratings between traders\\
+\code{atp\_tennis} & 1,191 & 19,986 & Tennis match results\\
+\code{football\_transfers} & 519 & 4,755 & Football player transfers\\
+\code{lichess\_chess} & 1,780 & 2,891 & Online chess results\\
+\code{foodcom\_recipes} & 1,500 & 13,893 & Order in which users review recipes\\
+\code{foodcom\_cooks} & 2,121 & 62,068 & Users reviewing other users' recipes\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{A note on size.} The two largest networks, \code{wikispeedia} and \code{bitcoin\_alpha}, produce dense matrices with more than $10^7$ entries. They need more memory and time for tasks such as computing all eigenvalues. Everything requested in the project is possible, but plan your computations and think about efficient ways of storing and multiplying the matrices. The other networks are comfortable with dense matrices.
+
+\section{The networks}
+
+\dataset{Email-Eu-core}{email\_eu\_core}{1,005}{25,571}
+{member $i$ sent at least one email to member $j$.}
+{Email traffic between members of a large European research institution. Each node is an anonymous member and has a department label (42 departments). Only messages between members of the institution are included.}
+{Stanford Network Analysis Project (SNAP), \url{https://snap.stanford.edu/data/email-Eu-core.html}. Cited as Yin et al.\ and Leskovec et al.\ in the references.}
+{The official file was used unchanged: all 1,005 nodes and 25,571 edges. The 642 self-loops (emails to oneself) are kept. The group is the department number.}
+{The graph says that a message was sent, not how many, when, or what they said. Do not attempt to identify any person.}
+
+\dataset{Political blogs}{political\_blogs}{1,490}{19,022}
+{blog $i$ linked to blog $j$ in a February 2005 crawl of the blogs' front pages.}
+{US political weblogs around the 2004 presidential election. Each blog is labelled liberal or conservative.}
+{Mark Newman's network data page, \url{https://websites.umich.edu/~mejn/netdata/}. Cited as Adamic and Glance in the references.}
+{The original file has 19,090 link rows. We collapsed 65 repeated links and removed 3 self-loops, which gives 19,022 binary edges. Blog addresses are kept as labels. The group is the political side.}
+{The source warns that the political labels were assigned partly from directories and partly by hand, so some may be wrong. A link is not necessarily an endorsement.}
+
+\dataset{Florida Bay food web}{florida\_bay}{128}{2,106}
+{carbon is transferred from compartment $i$ to compartment $j$ (often $j$ eats $i$).}
+{The carbon flows of the Florida Bay ecosystem. Nodes are compartments: species or groups of organisms, plus special nodes such as Input, Output and Respiration.}
+{SNAP, \url{https://snap.stanford.edu/data/Florida-bay.html}, based on the ecological study cited as Ulanowicz et al.\ in the references; group metadata from Benson et al.}
+{The official binary edge set was kept as it is. There are no repeated rows or self-loops. Only 62 of the 128 compartments have a recorded ecological group; the others are left blank.}
+{A random walk along carbon flow is a model, not the movement of animals. A high score does not mean ecological importance in general.}
+
+\dataset{\emph{C.\ elegans} neural network}{celegans\_frontal}{131}{764}
+{there is a synaptic connection from neuron $i$ to neuron $j$.}
+{The wiring of the frontal part of the nervous system of the roundworm \emph{C.\ elegans}. Nodes are neurons, labelled by name, and two-dimensional coordinates are given so that the network can be drawn as it sits in the worm.}
+{SNAP, \url{https://snap.stanford.edu/data/C-elegans-frontal.html}. Cited as Kaiser and Hilgetag in the references.}
+{All 131 neurons and 764 edges are kept, with no repeated rows or self-loops. Names and coordinates are copied from the original.}
+{The graph is anatomical connectivity, not recorded activity. A synapse by itself does not show that one neuron drives another in an experiment.}
+
+\dataset{CollegeMsg: private messages}{collegemsg}{1,899}{20,296}
+{user $i$ sent at least one private message to user $j$.}
+{Private messages exchanged on an online social network at the University of California, Irvine, over about 193 days. A message does not imply a reply.}
+{SNAP, \url{https://snap.stanford.edu/data/CollegeMsg.html}. Cited as Panzarasa et al.\ in the references.}
+{The original file lists 59,835 timestamped messages. We kept only the sender and the receiver, collapsed repeated messages between the same ordered pair, and removed messages to oneself. Timestamps and message counts are not in the files. Users are anonymous numbers.}
+{The graph records who wrote to whom, not what was said or whether the person answered. Do not attempt to identify any person.}
+
+\dataset{Wikispeedia: Wikipedia articles}{wikispeedia}{4,604}{119,772}
+{article $i$ contains a hyperlink to article $j$.}
+{A small snapshot of Wikipedia: the 4,604 articles of the \emph{Wikipedia Selection for Schools}, used in the Wikispeedia navigation game. Each article has a subject (Science, Geography, Art, History, and so on).}
+{SNAP, \url{https://snap.stanford.edu/data/wikispeedia.html}. Cited as West and Leskovec and as West et al.\ in the references. Wikipedia text is available under CC BY-SA.}
+{We used the article list and the link list of the original download. Repeated links and self-links were removed. The label is the article title and the group is the subject of its first listed category. The game's navigation paths are not part of the data.}
+{This is a 2007 school subset, so only links between these articles exist. It is the largest network of the catalogue (see the note on size).}
+
+\dataset{Bitcoin Alpha: web of trust}{bitcoin\_alpha}{3,783}{22,650}
+{user $i$ gave user $j$ a positive trust rating (from +1 to +10).}
+{Traders on the Bitcoin Alpha platform rate each other from $-10$ (total distrust) to $+10$ (total trust) to reduce fraud. The original network is signed and weighted; this one keeps only the positive trust ratings.}
+{SNAP, \url{https://snap.stanford.edu/data/soc-sign-bitcoin-alpha.html}. Cited as Kumar et al.\ in the references.}
+{Ratings of 0 or below do not create edges, and the rating values are dropped. If a user rated the same person more than once, the pair counts as one edge if any rating was positive. All 3,783 users stay as nodes even if they have no positive ratings.}
+{About 7\% of the original ratings were negative, so the graph is a partial picture of the community. A high score means many positive ratings, not proven honesty. This is one of the two largest networks.}
+
+\dataset{ATP tennis: who lost to whom}{atp\_tennis}{1,191}{19,986}
+{player $i$ lost at least once to player $j$ in a tour-level match.}
+{Men's professional tennis, seasons 2016--2025. Every player is a node. A win is an arrow \emph{from the loser to the winner}, so a random walker moves from a defeated player to the player who beat him.}
+{Jeff Sackmann / Tennis Abstract, \url{https://github.com/JeffSackmann/tennis_atp} (CC BY-NC-SA 4.0: attribution, non-commercial). Cited as Sackmann in the references.}
+{We read one match file per season, turned each match into one arrow from loser to winner, and collapsed repeated pairs into one edge. The label is the player name and the group is the country code most often listed for the player.}
+{Only the pairs that met in these seasons are connected, and the number of meetings, the score and the surface are ignored. You can compare your results with the official rankings, but they measure different things.}
+
+\dataset{Football transfers}{football\_transfers}{519}{4,755}
+{at least one permanent player transfer went from club $i$ (seller) to club $j$ (buyer).}
+{The football transfer market around the English Premier League. Nodes are the Premier League clubs of the data and the clubs they bought players from or sold players to. The group tells you whether a club is a league club or another club.}
+{Transfermarkt data as collected in \url{https://github.com/ewenme/transfers}. Cited as Menezes in the references.}
+{Each transfer gives an arrow from the selling club to the buying club. Loans, youth-team promotions and transfers without a clear fee were left out. Club names were cleaned automatically and merged when they plainly referred to the same club; a few clubs may still be split or merged wrongly. Clubs outside the league with very few trading partners were removed.}
+{Transfers between two clubs that are both outside the league are missing, so the outer clubs exist in this graph only because of their trade with league clubs. The data were scraped and may have errors, especially for older seasons.}
+
+\dataset{Lichess chess: who lost to whom}{lichess\_chess}{1,780}{2,891}
+{player $i$ lost at least one decisive game to player $j$.}
+{Online games played on the Lichess chess server and collected in a public dataset of about 20,000 games. A decisive game is an arrow from the loser to the winner. Players are grouped by their average rating.}
+{Chess Game Dataset (Lichess), \url{https://github.com/arthur9916/Chess-Game-Dataset-Lichess-}. Game data from Lichess, \url{https://lichess.org}. Cited as the dataset authors in the references.}
+{Draws were left out because they have no direction. Repeated results between the same pair give one edge. Players with only a few distinct opponents were removed repeatedly so that a core of players remains. The label is the Lichess username.}
+{This network is sparse, since most players face few opponents. It is not a random sample of Lichess players. It may behave very differently from the other networks.}
+
+\dataset{Food.com: what people cook next}{foodcom\_recipes}{1,500}{13,893}
+{some user reviewed recipe $i$ and, on a later day, reviewed recipe $j$ as their next review.}
+{A recipe-to-recipe network built from the order in which users review recipes on the website Food.com. If a user reviewed a cake and later a lasagna, the cake points to the lasagna. A random walker behaves like a typical user moving from recipe to recipe. Nodes are the 1,500 most-reviewed recipes, grouped by dish type.}
+{Food.com Recipes and Interactions, as used in Majumder et al., shared by the teaching team. Cited as Majumder et al.\ in the references.}
+{For each user we sorted their reviews by date and linked each recipe to the next different recipe reviewed on a later day. Reviews on the same day were not ordered, so they give no edge. Only recipes with names and enough reviews were kept. Review texts and ratings are not included.}
+{Reviews are written when users choose to post them, not necessarily when they cook. Only the most popular recipes are present.}
+
+\dataset{Food.com: cooks reviewing cooks}{foodcom\_cooks}{2,121}{62,068}
+{user $i$ reviewed at least one recipe published by user $j$.}
+{A reputation network on Food.com. Users publish recipes and review the recipes of others; an arrow goes from the reviewer to the author. To keep the network manageable, we kept its dense core: users that remain after repeatedly removing everyone with fewer than 10 connections. The group tells how many recipes the user has published.}
+{Same data as the previous network, Food.com Recipes and Interactions (Majumder et al.).}
+{Reviews were joined to the recipes' authors, reviews of one's own recipes were removed, and repeated pairs collapsed to one edge. Users are anonymous numbers. Review texts, ratings and dates are not included.}
+{The core is only a small part of the site, so your conclusions apply to this group of users. Do not attempt to identify any person.}
+
+\section{References}
+
+The references below follow the MLA style. Add the access date or version your group used if your style guide asks for it.
+
+\begin{itemize}[label={}, leftmargin=1.5em, itemindent=-1.5em]
+\item Adamic, Lada A., and Natalie Glance. ``The Political Blogosphere and the 2004 U.S. Election: Divided They Blog.'' \emph{Proceedings of the WWW-2005 Workshop on the Weblogging Ecosystem}, 2005.
+\item Benson, Austin R., David F. Gleich, and Jure Leskovec. ``Higher-Order Organization of Complex Networks.'' \emph{Science}, vol. 353, no. 6295, 2016, pp. 163--166.
+\item Chess Game Dataset (Lichess). GitHub repository, \url{https://github.com/arthur9916/Chess-Game-Dataset-Lichess-}. Game data from Lichess, \url{https://lichess.org}.
+\item Kaiser, Marcus, and Claus C. Hilgetag. ``Nonoptimal Component Placement, but Short Processing Paths, due to Long-Distance Projections in Neural Systems.'' \emph{PLoS Computational Biology}, vol. 2, no. 7, 2006, e95.
+\item Kumar, Srijan, et al. ``Edge Weight Prediction in Weighted Signed Networks.'' \emph{IEEE International Conference on Data Mining (ICDM)}, 2016, pp. 221--230.
+\item Leskovec, Jure, Jon Kleinberg, and Christos Faloutsos. ``Graph Evolution: Densification and Shrinking Diameters.'' \emph{ACM Transactions on Knowledge Discovery from Data}, vol. 1, no. 1, 2007.
+\item Leskovec, Jure, and Andrej Krevl. \emph{SNAP Datasets: Stanford Large Network Dataset Collection}. 2014, \url{https://snap.stanford.edu/data/}.
+\item Majumder, Bodhisattwa Prasad, et al. ``Generating Personalized Recipe from Historical User Preference.'' \emph{Proceedings of EMNLP}, 2019. Data: Food.com Recipes and Interactions.
+\item Menezes, Ewen. \emph{transfers}. GitHub repository, \url{https://github.com/ewenme/transfers}. Data from Transfermarkt.
+\item Newman, Mark E. J. Network data. \url{https://websites.umich.edu/~mejn/netdata/}.
+\item Panzarasa, Pietro, Tore Opsahl, and Kathleen M. Carley. ``Patterns and Dynamics of Users' Behavior and Interaction: Network Analysis of an Online Community.'' \emph{Journal of the American Society for Information Science and Technology}, vol. 60, no. 5, 2009, pp. 911--932.
+\item Sackmann, Jeff. \emph{Tennis ATP Match Data}. Tennis Abstract, \url{https://github.com/JeffSackmann/tennis_atp}. CC BY-NC-SA 4.0.
+\item Ulanowicz, Robert E., Cristina Bondavalli, and Michael S. Egnotovich. ``Network Analysis of Trophic Dynamics in South Florida Ecosystems: The Florida Bay Ecosystem.'' Annual Report to the U.S. Geological Survey, Biological Resources Division, 1997.
+\item West, Robert, and Jure Leskovec. ``Human Wayfinding in Information Networks.'' \emph{Proceedings of the 21st International Conference on World Wide Web (WWW)}, 2012.
+\item West, Robert, Joelle Pineau, and Doina Precup. ``Wikispeedia: An Online Game for Inferring Semantic Distances between Concepts.'' \emph{Proceedings of IJCAI}, 2009.
+\item Yin, Hao, et al. ``Local Higher-Order Graph Clustering.'' \emph{Proceedings of the ACM SIGKDD Conference}, 2017.
+\end{itemize}
+
+\end{document}
