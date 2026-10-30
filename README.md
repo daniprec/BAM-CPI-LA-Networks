@@ -37,13 +37,13 @@ Edges are binary (no repeated rows). Self-loops were removed everywhere except i
 
 ```python
 import pandas as pd
-base = "https://raw.githubusercontent.com/<owner>/BAM-CPI-LA-Networks/main/data/<name>/"
+base = "https://raw.githubusercontent.com/daniprec/BAM-CPI-LA-Networks/main/data/<name>/"
 nodes = pd.read_csv(base + "nodes.csv")
 edges = pd.read_csv(base + "edges.csv")
 n = len(nodes)
 ```
 
-(Replace `<owner>` and `<name>`. This URL works only if the repository is public; otherwise download the folder.)
+(Replace `<name>` with the folder name of your network. This URL works only if the repository is public; otherwise download the folder.)
 
 ## Citing and licenses
 
